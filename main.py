@@ -51,12 +51,11 @@ def main():
         )
         parser.add_argument('link', help='Введите ссылку: ')
         args = parser.parse_args()
-        user_input = args.link
-        if is_bitlink(token, user_input):
-            clicks_count = count_clicks(token, user_input)
+        if is_bitlink(token, args.link):
+            clicks_count = count_clicks(token, args.link)
             formed_response = f"По вашей ссылке прошли {clicks_count} раз(а)"
         else:
-            short_link = shorten_link(token, user_input)
+            short_link = shorten_link(token, args.link)
             formed_response = f"Битлинк: {short_link}"
         return formed_response
     except (r_e.HTTPError, r_e.ConnectionError, r_e.MissingSchema):
